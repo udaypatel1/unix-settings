@@ -3,8 +3,12 @@
 name="cfonts 'welcome uday' --gradient magenta,white --transition-gradient --align 'center'"
 eval $name
 
+RPROMPT="%B%F{magenta}[%f%F{white}%D{%L:%M:%S}%f%F{magenta}]%f%b"
+
 # Base Aliases
 alias home='cd ~/'
+alias restart='source ~/.zprofile'
+alias settings='micro ~/.zprofile'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias hold='caffeinate -d'
@@ -15,8 +19,10 @@ alias view='open -a Preview.app'
 alias ps-port='f() { lsof -i tcp:$1 }; f'
 
 # Git Commands
+alias gs='git status'
 alias gaa='git add -A'
 alias gcm='git commit -m'
+alias gac='git add -A; git commit -m'
 
 # Python Virtual Environment Commands
 alias venv-init='python3 -m venv .venv; echo "\nPython Virtual Environment: INITIALIZED\n"'
@@ -29,6 +35,7 @@ alias ls='echo "" && LS_COLORS="di=35:fi=37:ln=32:ex=31" gls --color -h --group-
 alias cheats='cd ~/.local/share/navi/cheats'
 alias godir='cd $(find . -type d -print | fzf)'
 alias sk='rg --files | sk --preview="bat {} --color=always" --preview-window right:75%'
+alias search='rg -S'
 alias ps-active='lsof -i -n -P | rg LISTEN'
 
 # Append current git branch to prompt if inside a Git repository
