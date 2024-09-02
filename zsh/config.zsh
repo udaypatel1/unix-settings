@@ -18,6 +18,9 @@ alias view='open -a Preview.app'
 # System Info
 alias ps-port='f() { lsof -i tcp:$1 }; f'
 
+# Kubernetes Commands
+alias k='kubectl'
+
 # Git Commands
 alias gs='git status'
 alias gaa='git add -A'
