@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Install dependencies in Brewfile
 
 brew help > /dev/null 2>&1 || RESULT=$?
