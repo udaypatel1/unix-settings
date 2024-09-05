@@ -3,8 +3,6 @@
 name="cfonts 'welcome uday' --gradient magenta,white --transition-gradient --align 'center'"
 eval $name
 
-RPROMPT="%B%F{magenta}[%f%F{white}%D{%L:%M:%S}%f%F{magenta}]%f%b"
-
 # Base Aliases
 alias home='cd ~/'
 alias restart='source ~/.zprofile'
@@ -22,7 +20,6 @@ alias ps-port='f() { lsof -i tcp:$1 }; f'
 alias k='kubectl'
 
 # Git Commands
-alias gs='git status'
 alias gaa='git add -A'
 alias gcm='git commit -m'
 alias gac='git add -A; git commit -m'
@@ -38,8 +35,28 @@ alias ls='echo "" && LS_COLORS="di=35:fi=37:ln=32:ex=31" gls --color -h --group-
 alias cheats='cd ~/.local/share/navi/cheats'
 alias godir='cd $(find . -type d -print | fzf)'
 alias sk='rg --files | sk --preview="bat {} --color=always" --preview-window right:75%'
-alias search='rg -S'
 alias ps-active='lsof -i -n -P | rg LISTEN'
+alias search='rg -S'
+
+# Time Command Execution
+function preexec() {
+    cmd_start=$(perl -MTime::HiRes=time -e 'print time')
+}
+
+# Capture the end time and calculate the precise elapsed time
+function precmd() {
+    local cmd_end=$(perl -MTime::HiRes=time -e 'print time')
+    
+    # Calculate the elapsed time with full floating-point precision
+    elapsed=$(echo "$cmd_end - $cmd_start - .025" | bc)
+    
+    # Format the elapsed time to 3 decimal places
+    elapsed=$(printf "%.3f" "$elapsed")
+
+	# Configure RPROMPT
+	RPROMPT="%B%F{magenta}[%f%F{white}%D{%L:%M:%S}%f%F{magenta}]%f%b %B%F{magenta}[%f%F{green}${elapsed}%f%F{magenta}]%f%B"
+    
+}
 
 # Append current git branch to prompt if inside a Git repository
 function parse_git_branch() {
