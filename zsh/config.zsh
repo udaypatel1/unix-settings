@@ -24,7 +24,7 @@ alias view='open -a Preview.app'
 alias ps-port='f() { lsof -i tcp:$1 }; f'
 
 # Web
-alias get-cert='f() { openssl s_client -connect $1 2>/dev/null </dev/null | sed -ne "/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p" }; f'
+alias get-cert='f() { openssl s_client -connect $1:443 2>/dev/null </dev/null | sed -ne "/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p" }; f'
 
 # Kubernetes Commands
 alias k='kubectl'
