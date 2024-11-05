@@ -3,6 +3,13 @@
 name="cfonts 'welcome uday' --gradient magenta,white --transition-gradient --align 'center'"
 eval $name
 
+# Turn on Auto Suggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Auto Completions for Git
+autoload -Uz compinit && compinit
+
 # Base Aliases
 alias home='cd ~/'
 alias restart='source ~/.zprofile'
@@ -15,6 +22,9 @@ alias view='open -a Preview.app'
 
 # System Info
 alias ps-port='f() { lsof -i tcp:$1 }; f'
+
+# Web
+alias get-cert='f() { openssl s_client -connect $1 2>/dev/null </dev/null | sed -ne "/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p" }; f'
 
 # Kubernetes Commands
 alias k='kubectl'
